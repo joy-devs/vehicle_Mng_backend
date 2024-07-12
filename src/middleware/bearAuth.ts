@@ -40,6 +40,6 @@ export const jm = async (c:Context, next: Next) =>{
 
 export const adminRoleAuth = async (c: Context, next: Next) =>await authMiddleware(c,next,"admin")
 export const userRoleAuth = async (c: Context, next: Next) =>await authMiddleware(c,next,"user")
-// export const bothRoleAuth = async (c: Context, next: Next) =>await jm(c,next)
+export const bothRoleAuth = async (c: Context, next: Next) =>await jm(c,next)
 // export const restaurantownerRoleAuth = async (c: Context, next: Next) =>await jm(c,"restaurantowner")
 

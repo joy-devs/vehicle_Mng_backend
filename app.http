@@ -1,0 +1,125 @@
+GET http://localhost:8000/api/users
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkYXZpZCBzY290dCIsInJvbGUiOiJ1c2VyIiwiZXhwIjoxNzIwNzk5NDc1fQ.O91aB8TK16dcdKAPB5zOojgqE4T8a9x9p8L5kiHORC8 
+
+###
+POST http://localhost:8000/api/users
+Content-Type: application/json
+Accept: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkYXZpZCBzY290dCIsInJvbGUiOiJ1c2VyIiwiZXhwIjoxNzIwNzk5NDc1fQ.O91aB8TK16dcdKAPB5zOojgqE4T8a9x9p8L5kiHORC8 
+
+{
+    "user_id": 5,
+    "full_name": "Claire Treasured",
+    "email": "claire@gmail.com",
+    "contact_phone": "0798257457",
+    "address": "Qatar",
+    "role": "admin"   
+}
+
+###
+DELETE http://localhost:8000/api/users/5
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkYXZpZCBzY290dCIsInJvbGUiOiJ1c2VyIiwiZXhwIjoxNzIwNzk5NDc1fQ.O91aB8TK16dcdKAPB5zOojgqE4T8a9x9p8L5kiHORC8 
+###
+
+
+POST http://localhost:8000/api/specifications
+Content-Type: application/json
+Accept: application/json
+
+{
+   "vehicle_id": 5,
+    "manufacturer": "Toyota",
+    "model": "model 4",
+    "year": 2020,
+    "fuel_type": "gasoline",
+    "engine_capacity": "2.0L",
+    "transmission": "automatic",
+    "seating_capacity": 7,
+    "color": "white",
+    "features": "ambient lighting"
+    }
+
+###
+GET http://localhost:8000/api/auth 
+###
+
+POST http://localhost:8000/api/register 
+Content-Type: application/json
+
+{
+"userId":2,
+"username":"joy" ,
+"password":"pass",
+"role":"admin"
+
+}
+###
+
+POST http://localhost:8000/api/login
+Content-Type: application/json
+
+{
+"username":"joy" ,
+"password":"pass"
+ 
+}
+
+###
+POST http://localhost:8000/api/register
+Content-Type: application/json
+
+{
+"userId":1,
+"username":"kenneth hargin" ,
+"password":"create!2",
+"role":"admin"
+  
+}
+###
+POST http://localhost:8000/api/login
+Content-Type: application/json
+
+{
+"username":"kenneth hargin" ,
+"password":"create!2"
+
+}
+
+###
+POST http://localhost:8000/api/register
+Content-Type: application/json
+
+{
+"userId":4,
+"username":"lilian keila" ,
+"password":"hello98%",
+"role":"admin" 
+}
+###
+POST http://localhost:8000/api/login
+Content-Type: application/json
+
+{
+"username":"lilian keila" ,
+"password":"hello98%"
+  
+}
+###
+POST http://localhost:8000/api/register
+Content-Type: application/json
+
+{
+"userId":2,
+"username":"david scott" ,
+"password":"exit45@",
+"role":"user" 
+}
+###
+POST http://localhost:8000/api/login
+Content-Type: application/json
+
+{
+  "username":"david scott" ,
+"password":"exit45@"  
+}
+

@@ -11,8 +11,20 @@ import {TicketsRouter} from "./tickets/ticket.router"
 import {VehiclesRouter} from "./vehicles/vehicle.router"
 import {FleetsRouter} from "./fleets/fleet.router"
 import { authRouter } from "./auth/auth.router";
- 
+
+import { cors } from 'hono/cors'
+
 const app = new Hono();
+app.use(
+  '*',
+  cors({
+    origin: '*',
+    allowMethods: ['POST', 'GET', 'PUT', 'DELETE']
+  })
+)
+
+ 
+
 
 
 //custom route

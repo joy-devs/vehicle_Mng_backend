@@ -2,14 +2,15 @@ import { Hono } from 'hono';
 import { listspecifications, getspecifications, createspecifications, updatespecifications, deletespecifications } from './specification.controller'; 
 import { zValidator } from '@hono/zod-validator'; 
 import { VehicleSpecificationsTableSchema } from '../validator'; 
+import { adminRoleAuth,bothRoleAuth } from '../middleware/bearAuth'; 
 
 export const specificationsRouter = new Hono();
 
 // Get all specifications
-specificationsRouter.get('/specifications', listspecifications);
+specificationsRouter.get('/specifications', adminRoleAuth, listspecifications);
 
 // Get a single specification
-specificationsRouter.get('/specifications/:id', getspecifications);
+specificationsRouter.get('/specifications/:id',bothRoleAuth, getspecifications);
 
 // Create a specification
 specificationsRouter.post(
@@ -19,7 +20,7 @@ specificationsRouter.post(
       return c.json(result.error, 400);
     }
   }),
-  createspecifications
+  bothRoleAuth, createspecifications
 );
 
 // Update a specification
@@ -30,10 +31,10 @@ specificationsRouter.put(
       return c.json(result.error, 400);
     }
   }),
-  updatespecifications
+  bothRoleAuth, updatespecifications
 );
 
 // Delete a specification
-specificationsRouter.delete('/specifications/:id', deletespecifications);
+specificationsRouter.delete('/specifications/:id', bothRoleAuth,deletespecifications);
 
 export default specificationsRouter;

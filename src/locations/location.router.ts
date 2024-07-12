@@ -2,14 +2,15 @@ import { Hono } from 'hono';
 import { listlocations, getlocations, createlocations, updatelocations, deletelocations } from './location.controller'; 
 import { zValidator } from '@hono/zod-validator'; 
 import { LocationTableSchema } from '../validator'; 
+import { adminRoleAuth,bothRoleAuth } from '../middleware/bearAuth'; 
 
 export const locationsRouter = new Hono();
 
 // Get all locations
-locationsRouter.get('/locations', listlocations);
+locationsRouter.get('/locations',adminRoleAuth, listlocations);
 
 // Get a single location
-locationsRouter.get('/locations/:id', getlocations);
+locationsRouter.get('/locations/:id', bothRoleAuth, getlocations);
 
 // Create a user
 locationsRouter.post(
@@ -19,7 +20,7 @@ locationsRouter.post(
       return c.json(result.error, 400);
     }
   }),
-  createlocations
+  bothRoleAuth, createlocations
 );
 
 // Update a location
@@ -30,10 +31,10 @@ locationsRouter.put(
       return c.json(result.error, 400);
     }
   }),
-  updatelocations
+  bothRoleAuth, updatelocations
 );
 
 // Delete a location
-locationsRouter.delete('/locations/:id', deletelocations);
+locationsRouter.delete('/locations/:id', bothRoleAuth, deletelocations);
 
 export default locationsRouter;

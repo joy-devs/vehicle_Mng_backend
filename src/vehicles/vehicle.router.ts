@@ -1,15 +1,16 @@
 import { Hono } from 'hono';
 import { listVehicles, getVehicles, createVehicles, updateVehicles, deleteVehicles } from './vehicle.controller'; 
 import { zValidator } from '@hono/zod-validator'; 
-import { VehiclesTableSchema } from '../validator'; 
+import { VehiclesTableSchema } from '../validator';
+import { adminRoleAuth,bothRoleAuth } from '../middleware/bearAuth'; 
 
 export const VehiclesRouter = new Hono();
 
 // Get all Vehicles
-VehiclesRouter.get('/Vehicles', listVehicles);
+VehiclesRouter.get('/Vehicles', adminRoleAuth, listVehicles);
 
 // Get a single Vehicles
-VehiclesRouter.get('/Vehicles/:id', getVehicles);
+VehiclesRouter.get('/Vehicles/:id', bothRoleAuth, getVehicles);
 
 // Create a Vehicle
 VehiclesRouter.post(
@@ -19,7 +20,7 @@ VehiclesRouter.post(
       return c.json(result.error, 400);
     }
   }),
-  createVehicles
+  adminRoleAuth, createVehicles
 );
 
 // Update a Vehicle
@@ -30,10 +31,10 @@ VehiclesRouter.put(
       return c.json(result.error, 400);
     }
   }),
-  updateVehicles
+  adminRoleAuth, updateVehicles
 );
 
 // Delete a Vehicle
-VehiclesRouter.delete('/users/:id', deleteVehicles);
+VehiclesRouter.delete('/users/:id', adminRoleAuth, deleteVehicles);
 
 export default VehiclesRouter;

@@ -1,12 +1,13 @@
 import { Hono } from 'hono';
 import { listusers, getusers, createusers, updateusers, deleteusers } from './user.controller'; 
 import { zValidator } from '@hono/zod-validator'; 
-import { UsersTableSchema } from '../validator'; 
+import { UsersTableSchema } from '../validator';
+import { adminRoleAuth,bothRoleAuth } from '../middleware/bearAuth'; 
 
 export const usersRouter = new Hono();
 
 // Get all users
-usersRouter.get('/users', listusers);
+usersRouter.get('/users', adminRoleAuth, listusers);
 
 // Get a single usera
 usersRouter.get('/users/:id', getusers);
@@ -19,7 +20,7 @@ usersRouter.post(
       return c.json(result.error, 400);
     }
   }),
-  createusers
+  bothRoleAuth, createusers
 );
 
 // Update a user
@@ -30,10 +31,10 @@ usersRouter.put(
       return c.json(result.error, 400);
     }
   }),
-  updateusers
+  bothRoleAuth, updateusers
 );
 
 // Delete a user
-usersRouter.delete('/users/:id', deleteusers);
+usersRouter.delete('/users/:id', bothRoleAuth, deleteusers);
 
 export default usersRouter;

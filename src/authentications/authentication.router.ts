@@ -2,14 +2,15 @@ import { Hono } from 'hono';
 import { listauthentications, getauthentications, createauthentications, updateauthentications, deleteauthentications } from './authentication.controller'; 
 import { zValidator } from '@hono/zod-validator'; 
 import { AuthenticationTableSchema } from '../validator'; 
+import { adminRoleAuth,bothRoleAuth } from '../middleware/bearAuth';
 
 export const authenticationsRouter = new Hono();
 
 // Get all authentications
-authenticationsRouter.get('/authentications', listauthentications);
+authenticationsRouter.get('/authentications', adminRoleAuth, listauthentications);
 
 // Get a single authentication
-authenticationsRouter.get('/authentications/:id', getauthentications);
+authenticationsRouter.get('/authentications/:id',bothRoleAuth, getauthentications);
 
 // Create a authentication
 authenticationsRouter.post(
@@ -19,7 +20,7 @@ authenticationsRouter.post(
       return c.json(result.error, 400);
     }
   }),
-  createauthentications
+  adminRoleAuth,createauthentications
 );
 
 // Update a authentication
@@ -30,10 +31,10 @@ authenticationsRouter.put(
       return c.json(result.error, 400);
     }
   }),
-  updateauthentications
+  bothRoleAuth, updateauthentications
 );
 
 // Delete a authentication
-authenticationsRouter.delete('/users/:id', deleteauthentications);
+authenticationsRouter.delete('/users/:id', bothRoleAuth, deleteauthentications);
 
 export default authenticationsRouter;

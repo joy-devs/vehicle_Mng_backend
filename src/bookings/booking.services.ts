@@ -1,6 +1,8 @@
 import { eq } from "drizzle-orm";
 import db from "../drizzle/db";
-import { BookingsTable, TIBooking, TSBooking } from "../drizzle/schema"; // 
+import { BookingsTable, paymentRelations, PaymentsTable, TIBooking, TSBooking } from "../drizzle/schema"; // 
+import { promise } from "zod";
+import { Query } from "pg";
 
 export const BookingsTableService = async (limit?: number): Promise<TSBooking[] | null> => {
     if (limit) {
@@ -31,3 +33,4 @@ export const deleteBookingsTableService = async (id: number): Promise<string> =>
     await db.delete(BookingsTable).where(eq(BookingsTable.booking_id, id));
     return "booking deleted successfully";
 }
+
