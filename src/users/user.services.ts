@@ -13,7 +13,10 @@ export const UsersTableService = async (limit?: number): Promise<TSUser[] | null
 
 export const getUsersTableService = async (id: number): Promise<TIUser | undefined> => {
     return await db.query.UsersTable.findFirst({
-        where: eq(UsersTable.user_id, id)
+        where: eq(UsersTable.user_id, id), 
+        with:{
+            bookings:true
+        }
     });
 }
 

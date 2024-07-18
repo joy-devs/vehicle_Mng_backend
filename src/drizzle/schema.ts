@@ -4,7 +4,7 @@ import { pgEnum } from 'drizzle-orm/pg-core';
  
 // pgEnums
 export const roleEnum = pgEnum("role", ["user", "admin"]);
-export const bookingStatusEnum = pgEnum("booking_status", ["Pending", "Confirmed", "Cancelled"]);
+export const bookingStatusEnum = pgEnum("booking_status", ["Pending", "Confirmed", "Cancelled", "completed"]);
 export const paymentStatusEnum = pgEnum("payment_status", ["Pending", "Completed", "Failed"]);
  
 // Users Table
@@ -24,18 +24,22 @@ export const UsersTable = pgTable('users', {
 
 export const AuthonUser = pgTable("auth_on_users", {
   id: serial('id').primaryKey(),
-  userId:integer("user_id").notNull().references(() => UsersTable.user_id, { onDelete :"cascade"}),
+//   userId:integer("user_id").notNull().references(() => UsersTable.user_id, { onDelete :"cascade"}),
   password:varchar("password", {length:100}),
   username:varchar("username", {length:100}),
-  role: roleEnum("role").default("user")
+  address: varchar('address',{length:100}),
+  fullname:text("full_name"),
+  contact_Phone:integer("contact_phone"),
+  role: roleEnum("role").default("user"),
+  email:varchar("email", {length:100} )
 });
  
-export const AuthonUserRelations = relations(AuthonUser, ({one}) => ({
-  user: one(UsersTable, {
-    fields:[AuthonUser.userId],
-    references : [UsersTable.user_id]
-  })
-}));
+// export const AuthonUserRelations = relations(AuthonUser, ({one}) => ({
+//   user: one(UsersTable, {
+//     fields:[AuthonUser.userId],
+//     references : [UsersTable.user_id]
+//   })
+// }));
 
  
 // Vehicle Specifications Table

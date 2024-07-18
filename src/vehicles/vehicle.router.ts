@@ -7,7 +7,7 @@ import { adminRoleAuth,bothRoleAuth } from '../middleware/bearAuth';
 export const VehiclesRouter = new Hono();
 
 // Get all Vehicles
-VehiclesRouter.get('/Vehicles', adminRoleAuth, listVehicles);
+VehiclesRouter.get('/Vehicles', bothRoleAuth, listVehicles);
 
 // Get a single Vehicles
 VehiclesRouter.get('/Vehicles/:id', bothRoleAuth, getVehicles);

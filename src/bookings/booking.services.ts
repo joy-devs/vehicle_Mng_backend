@@ -1,8 +1,7 @@
 import { eq } from "drizzle-orm";
 import db from "../drizzle/db";
-import { BookingsTable, paymentRelations, PaymentsTable, TIBooking, TSBooking } from "../drizzle/schema"; // 
-import { promise } from "zod";
-import { Query } from "pg";
+import {BookingsTable , TIBooking, TSBooking } from "../drizzle/schema"; // 
+
 
 export const BookingsTableService = async (limit?: number): Promise<TSBooking[] | null> => {
     if (limit) {

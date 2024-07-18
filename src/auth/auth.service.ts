@@ -13,20 +13,23 @@ export const userLoginService = async (user: TSAuthonUser) => {
         columns: {
             username: true,
             role: true,
-            password: true
+            password: true,
+            // id:true,
+            // userId:true
+            
         }, where: sql` ${AuthonUser.username} = ${username}`,
-        with: {
-            user: {
-                columns: {
-                    user_id:true,
-                    full_name:true,
-                    email:true,
-                    contact_phone: true,
-                    address:true,
-                    role:true
+        // with: {
+        //     user: {
+        //         columns: {
+        //             user_id:true,
+        //             full_name:true,
+        //             email:true,
+        //             contact_phone: true,
+        //             address:true,
+        //             role:true
 
-                }
-            }
-        }
+        //         }
+        //     }
+        // }
     })
 }

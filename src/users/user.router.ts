@@ -9,7 +9,7 @@ export const usersRouter = new Hono();
 // Get all users
 usersRouter.get('/users', adminRoleAuth, listusers);
 
-// Get a single usera
+// Get a single user
 usersRouter.get('/users/:id', getusers);
 
 // Create a user

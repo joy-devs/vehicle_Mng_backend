@@ -7,7 +7,7 @@ import { adminRoleAuth,bothRoleAuth } from '../middleware/bearAuth';
 export const specificationsRouter = new Hono();
 
 // Get all specifications
-specificationsRouter.get('/specifications', adminRoleAuth, listspecifications);
+specificationsRouter.get('/specifications', bothRoleAuth, listspecifications);
 
 // Get a single specification
 specificationsRouter.get('/specifications/:id',bothRoleAuth, getspecifications);

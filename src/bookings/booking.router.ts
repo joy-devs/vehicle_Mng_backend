@@ -8,7 +8,7 @@ import { adminRoleAuth,bothRoleAuth } from '../middleware/bearAuth';
 export const bookingsRouter = new Hono();
 
 // Get all booking
-bookingsRouter.get('/bookings', adminRoleAuth, listbookings);
+bookingsRouter.get('/bookings', bothRoleAuth, listbookings);
 
 // Get a single bookings
 bookingsRouter.get('/bookings/:id', bothRoleAuth, getbookings);

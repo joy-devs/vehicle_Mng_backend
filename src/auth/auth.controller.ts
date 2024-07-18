@@ -16,6 +16,7 @@ export const registerUser = async (c: Context) => {
             const pass = user.password;
             const hashedPassword = await bcrypt.hash(pass, 10);
             user.password = hashedPassword;
+            console.log(user)
             const createdUser = await createAuthUserService(user);
             if (!createdUser) return c.text("User not created", 404);
             return c.json({ msg: createdUser }, 201);
@@ -37,7 +38,7 @@ export const registerUser = async (c: Context) => {
 export const loginUser = async (c: Context) => {
     try {
         const user = await c.req.json();
-
+        console.log(user)
         // Check if user exists
         const userExist = await userLoginService(user);
         if (!userExist) {
@@ -54,13 +55,13 @@ export const loginUser = async (c: Context) => {
         const payload = {
             sub: userExist.username,
             role: userExist.role,
-            exp: Math.floor(Date.now() / 1000) + (60 * 180),  // 3 hours expiration
+            exp: Math.floor(Date.now() / 1000) + (60 * 180),  
         };
 
         const secret = process.env.JWT_SECRET as string;
         const token = await sign(payload, secret);
 
-        return c.json({ token, user: { username: userExist.username, role: userExist.role } }, 200);
+        return c.json({ token, user: { username: userExist.username,id:userExist.userId ,role: userExist.role } }, 200);
     } catch (error: any) {
         return c.json({ error: error?.message }, 400);
     }

@@ -20,8 +20,8 @@ export const loginUserSchema = z.object({
   })
   
   export const registerUserSchema = z. object({
-    userId:z. number(),
     password: z.string(),
+    address: z.string(),
     username:z.string(),
     role:z.string().optional()
   })
@@ -76,10 +76,10 @@ export const PaymentsTableSchema = z.object({
     payment_id:z.number(), 
     booking_id:z.number(),
     amount:z.number(),
-    payment_status:z.number(),
+    payment_status:z.string(),
     payment_date: z.date().default(() => new Date()),
     payment_method:z.string(),
-    transaction_id:z.number(),
+    transaction_id:z.string(),
     created_at: z.date().default(() => new Date()),
     updated_at: z.date().default(() => new Date()),
   
