@@ -13,7 +13,18 @@ Content-Type: application/json
 GET http://localhost:8000/api/Vehicles
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZW5uZXRoIGhhcmdpbiIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTcyMTMxNjEyMH0.BaQCRINp_LfnqSlcsD8rbJX2ct-42nTn_zh-hXaenLc 
 ###
+GET http://localhost:8000/api/specifications
+###
 GET http://localhost:8000/api/bookings
+
+###
+GET http://localhost:8000/api/Payments
+###
+GET http://localhost:8000/api/Fleets
+###
+GET  http://localhost:8000/api/Tickets
+###
+GET http://localhost:8000/api/locations
 ###
 DELETE http://localhost:8000/api/Vehicles/3
 ###
@@ -75,70 +86,7 @@ Content-Type: application/json
 {
  "amount": 2
 } 
-###
 
-POST http://localhost:8000/api/register 
-Content-Type: application/json
-
-{
-"userId":2,
-"username":"joy" ,
-"password":"pass",
-"role":"admin"
-
-}
-###
-
-POST http://localhost:8000/api/login
-Content-Type: application/json
-
-{
-"username":"joy" ,
-"password":"pass"
- 
-}
-
-
-###
-POST http://localhost:8000/api/register
-Content-Type: application/json
-
-{
-"userId":1,
-"username":"kenneth hargin" ,
-"password":"create!2",
-"role":"admin"
-  
-}
-###
-POST http://localhost:8000/api/login
-Content-Type: application/json
-
-{
-"username":"kenneth hargin" ,
-"password":"create!2"
-
-}
-
-###
-POST http://localhost:8000/api/register
-Content-Type: application/json
-
-{
-"userId":4,
-"username":"lilian keila" ,
-"password":"hello98%",
-"role":"admin" 
-}
-###
-POST http://localhost:8000/api/login
-Content-Type: application/json
-
-{
-"username":"lilian keila" ,
-"password":"hello98%"
-  
-}
 ###
 POST http://localhost:8000/api/register
 Content-Type: application/json
@@ -162,38 +110,9 @@ Content-Type: application/json
 "password":"113"  
 }
 ###
-POST http://localhost:8000/api/register
-Content-Type: application/json
 
-{
-"username":"joy" ,
-"password":"112a",
-"role":"admin" ,
-"address":"nairobi",
-"fullname":"joy wambui",
-"contact_phone":"0789675354",
-"email":"joy@gmail.com"
-}
-###
-POST http://localhost:8000/api/login
-Content-Type: application/json
 
-{
-   "username":"joy " ,
-   "password":"112a" 
-}
 
-###
-POST http://localhost:8000/api/register
-Content-Type: application/json
-
-{
-"userId":5,
-"username":"Joy Wambui" ,
-"password":"112a",
-"role":"admin" 
-
-}
 ###
 POST http://localhost:8000/api/register
 Content-Type:application/json

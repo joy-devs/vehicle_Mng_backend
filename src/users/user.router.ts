@@ -7,7 +7,7 @@ import { adminRoleAuth,bothRoleAuth } from '../middleware/bearAuth';
 export const usersRouter = new Hono();
 
 // Get all users
-usersRouter.get('/users', adminRoleAuth, listusers);
+usersRouter.get('/users',  listusers);
 
 // Get a single user
 usersRouter.get('/users/:id', getusers);
@@ -20,7 +20,7 @@ usersRouter.post(
       return c.json(result.error, 400);
     }
   }),
-  bothRoleAuth, createusers
+   createusers
 );
 
 // Update a user
@@ -31,10 +31,10 @@ usersRouter.put(
       return c.json(result.error, 400);
     }
   }),
-  bothRoleAuth, updateusers
+   updateusers
 );
 
 // Delete a user
-usersRouter.delete('/users/:id', bothRoleAuth, deleteusers);
+usersRouter.delete('/users/:id',  deleteusers);
 
 export default usersRouter;
