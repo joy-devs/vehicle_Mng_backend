@@ -1,5 +1,5 @@
 DO $$ BEGIN
- CREATE TYPE "public"."booking_status" AS ENUM('Pending', 'Confirmed', 'Cancelled');
+ CREATE TYPE "public"."booking_status" AS ENUM('Pending', 'Confirmed', 'Cancelled', 'completed');
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -26,10 +26,13 @@ CREATE TABLE IF NOT EXISTS "authentication" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "auth_on_users" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"user_id" integer NOT NULL,
 	"password" varchar(100),
 	"username" varchar(100),
-	"role" "role" DEFAULT 'user'
+	"address" varchar(100),
+	"full_name" text,
+	"contact_phone" integer,
+	"role" "role" DEFAULT 'user',
+	"email" varchar(100)
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "bookings" (
@@ -101,7 +104,8 @@ CREATE TABLE IF NOT EXISTS "users" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "vehicle_specifications" (
-	"vehicle_id" serial PRIMARY KEY NOT NULL,
+	"vehicleSpec_id" serial PRIMARY KEY NOT NULL,
+	"vehicle_id" integer,
 	"manufacturer" varchar(255) NOT NULL,
 	"model" varchar(255) NOT NULL,
 	"year" integer NOT NULL,
@@ -114,8 +118,7 @@ CREATE TABLE IF NOT EXISTS "vehicle_specifications" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "vehicles" (
-	"vehicleSpec_id" serial PRIMARY KEY NOT NULL,
-	"vehicle_id" integer NOT NULL,
+	"vehicle_id" serial PRIMARY KEY NOT NULL,
 	"rental_rate" numeric NOT NULL,
 	"availability" boolean DEFAULT true NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
@@ -129,19 +132,13 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "auth_on_users" ADD CONSTRAINT "auth_on_users_user_id_users_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("user_id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
  ALTER TABLE "bookings" ADD CONSTRAINT "bookings_user_id_users_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("user_id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "bookings" ADD CONSTRAINT "bookings_vehicle_id_vehicle_specifications_vehicle_id_fk" FOREIGN KEY ("vehicle_id") REFERENCES "public"."vehicle_specifications"("vehicle_id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "bookings" ADD CONSTRAINT "bookings_vehicle_id_vehicles_vehicle_id_fk" FOREIGN KEY ("vehicle_id") REFERENCES "public"."vehicles"("vehicle_id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -159,7 +156,7 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "fleet_management" ADD CONSTRAINT "fleet_management_vehicle_id_vehicle_specifications_vehicle_id_fk" FOREIGN KEY ("vehicle_id") REFERENCES "public"."vehicle_specifications"("vehicle_id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "fleet_management" ADD CONSTRAINT "fleet_management_vehicle_id_vehicles_vehicle_id_fk" FOREIGN KEY ("vehicle_id") REFERENCES "public"."vehicles"("vehicle_id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -171,7 +168,7 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "vehicles" ADD CONSTRAINT "vehicles_vehicle_id_vehicle_specifications_vehicle_id_fk" FOREIGN KEY ("vehicle_id") REFERENCES "public"."vehicle_specifications"("vehicle_id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "vehicle_specifications" ADD CONSTRAINT "vehicle_specifications_vehicle_id_vehicles_vehicle_id_fk" FOREIGN KEY ("vehicle_id") REFERENCES "public"."vehicles"("vehicle_id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

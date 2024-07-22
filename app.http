@@ -1,9 +1,28 @@
-GET http://localhost:8000/api/users
+GET http://localhost:8000/api/test-checkout
 Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZW5uZXRoIGhhcmdpbiIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTcyMTMxNjEyMH0.BaQCRINp_LfnqSlcsD8rbJX2ct-42nTn_zh-hXaenLc
 
 ###
+POST http://localhost:8000/api/create-checkout
+Content-Type: application/json
+
+{
+  "booking_id": 2,
+  "amount":45
+}
+###
 GET http://localhost:8000/api/Vehicles
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZW5uZXRoIGhhcmdpbiIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTcyMTMxNjEyMH0.BaQCRINp_LfnqSlcsD8rbJX2ct-42nTn_zh-hXaenLc 
+###
+DELETE http://localhost:8000/api/Vehicles/3
+###
+POST http://localhost:8000/api/Vehicles
+Content-Type: application/json
+
+{
+  "rental_rate":100,
+  "availability":true
+  
+}
 ###
 
 GET http://localhost:8000/api/bookings
@@ -48,7 +67,12 @@ Accept: application/json
     }
 
 ###
-GET http://localhost:8000/api/auth 
+GET http://localhost:8000/api/test-checkout
+Content-Type: application/json
+
+{
+ "amount": 2
+} 
 ###
 
 POST http://localhost:8000/api/register 

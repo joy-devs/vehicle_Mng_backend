@@ -13,6 +13,7 @@ export const userLoginService = async (user: TSAuthonUser) => {
         columns: {
             username: true,
             role: true,
+            id: true,
             password: true,
             // id:true,
             // userId:true

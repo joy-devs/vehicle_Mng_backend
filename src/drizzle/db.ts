@@ -4,6 +4,7 @@ import {drizzle} from "drizzle-orm/neon-http";
 import{Client} from "pg";
 import { neon } from "@neondatabase/serverless";
 import * as schema from "./schema";
+import Stripe from "stripe";
  
  
  
@@ -26,6 +27,11 @@ const main = async () => {
  await client.connect();
  
 }
+
+export const stripe = new Stripe(process.env.STRIPE_SECRET_API_KEY as string,{
+    apiVersion:'2024-06-20',
+    typescript: true
+})
  
 main().catch((err)=> console.log(err));
  

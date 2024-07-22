@@ -1,5 +1,5 @@
 {
-  "id": "167fa5e9-4fe8-442d-99b2-0fd6e04e1ec5",
+  "id": "6be7e5ce-bcd3-4aab-9b3d-b76c3e1a74e6",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -70,12 +70,6 @@
           "primaryKey": true,
           "notNull": true
         },
-        "user_id": {
-          "name": "user_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
         "password": {
           "name": "password",
           "type": "varchar(100)",
@@ -88,6 +82,24 @@
           "primaryKey": false,
           "notNull": false
         },
+        "address": {
+          "name": "address",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "full_name": {
+          "name": "full_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "contact_phone": {
+          "name": "contact_phone",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "role": {
           "name": "role",
           "type": "role",
@@ -95,24 +107,16 @@
           "primaryKey": false,
           "notNull": false,
           "default": "'user'"
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "auth_on_users_user_id_users_user_id_fk": {
-          "name": "auth_on_users_user_id_users_user_id_fk",
-          "tableFrom": "auth_on_users",
-          "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -200,10 +204,10 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "bookings_vehicle_id_vehicle_specifications_vehicle_id_fk": {
-          "name": "bookings_vehicle_id_vehicle_specifications_vehicle_id_fk",
+        "bookings_vehicle_id_vehicles_vehicle_id_fk": {
+          "name": "bookings_vehicle_id_vehicles_vehicle_id_fk",
           "tableFrom": "bookings",
-          "tableTo": "vehicle_specifications",
+          "tableTo": "vehicles",
           "columnsFrom": [
             "vehicle_id"
           ],
@@ -362,10 +366,10 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "fleet_management_vehicle_id_vehicle_specifications_vehicle_id_fk": {
-          "name": "fleet_management_vehicle_id_vehicle_specifications_vehicle_id_fk",
+        "fleet_management_vehicle_id_vehicles_vehicle_id_fk": {
+          "name": "fleet_management_vehicle_id_vehicles_vehicle_id_fk",
           "tableFrom": "fleet_management",
-          "tableTo": "vehicle_specifications",
+          "tableTo": "vehicles",
           "columnsFrom": [
             "vehicle_id"
           ],
@@ -583,11 +587,17 @@
       "name": "vehicle_specifications",
       "schema": "",
       "columns": {
-        "vehicle_id": {
-          "name": "vehicle_id",
+        "vehicleSpec_id": {
+          "name": "vehicleSpec_id",
           "type": "serial",
           "primaryKey": true,
           "notNull": true
+        },
+        "vehicle_id": {
+          "name": "vehicle_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
         },
         "manufacturer": {
           "name": "manufacturer",
@@ -645,7 +655,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "vehicle_specifications_vehicle_id_vehicles_vehicle_id_fk": {
+          "name": "vehicle_specifications_vehicle_id_vehicles_vehicle_id_fk",
+          "tableFrom": "vehicle_specifications",
+          "tableTo": "vehicles",
+          "columnsFrom": [
+            "vehicle_id"
+          ],
+          "columnsTo": [
+            "vehicle_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -653,16 +677,10 @@
       "name": "vehicles",
       "schema": "",
       "columns": {
-        "vehicleSpec_id": {
-          "name": "vehicleSpec_id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
         "vehicle_id": {
           "name": "vehicle_id",
-          "type": "integer",
-          "primaryKey": false,
+          "type": "serial",
+          "primaryKey": true,
           "notNull": true
         },
         "rental_rate": {
@@ -694,21 +712,7 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "vehicles_vehicle_id_vehicle_specifications_vehicle_id_fk": {
-          "name": "vehicles_vehicle_id_vehicle_specifications_vehicle_id_fk",
-          "tableFrom": "vehicles",
-          "tableTo": "vehicle_specifications",
-          "columnsFrom": [
-            "vehicle_id"
-          ],
-          "columnsTo": [
-            "vehicle_id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     }
@@ -720,7 +724,8 @@
       "values": [
         "Pending",
         "Confirmed",
-        "Cancelled"
+        "Cancelled",
+        "completed"
       ]
     },
     "public.payment_status": {

@@ -1,1 +1,0 @@
-ALTER TABLE "auth_on_users" ADD COLUMN "email" varchar(100);

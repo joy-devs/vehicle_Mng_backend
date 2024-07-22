@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import { listPayments, getPayments, createPayments, updatePayments, deletePayments } from './payment.controller'; 
+import { listPayments, getPayment,  updatePayments, deletePayments, createPayments } from './payment.controller'; 
 import { zValidator } from '@hono/zod-validator'; 
 import { PaymentsTableSchema } from '../validator'; 
 import { adminRoleAuth,bothRoleAuth } from '../middleware/bearAuth';
@@ -10,17 +10,15 @@ export const PaymentsRouter = new Hono();
 PaymentsRouter.get('/Payments',adminRoleAuth, listPayments);
 
 // Get a single payment
-PaymentsRouter.get('/payments/:id',bothRoleAuth, getPayments);
+PaymentsRouter.get('/payments/:id',bothRoleAuth, getPayment);
 
 // Create a payment
 PaymentsRouter.post(
-  '/payments',
-  zValidator('json', PaymentsTableSchema, (result, c) => {
-    if (!result.success) {
-      return c.json(result.error, 400);
-    }
-  }),
-  bothRoleAuth, createPayments
+  '/create-checkout', createPayments.createCheckoutSession
+);
+
+PaymentsRouter.get(
+  '/test-checkout', createPayments.testCreateCheckoutSession
 );
 
 // Update a Payment

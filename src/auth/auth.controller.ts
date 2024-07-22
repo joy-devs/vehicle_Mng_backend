@@ -61,7 +61,7 @@ export const loginUser = async (c: Context) => {
         const secret = process.env.JWT_SECRET as string;
         const token = await sign(payload, secret);
 
-        return c.json({ token, user: { username: userExist.username,id:userExist.userId ,role: userExist.role } }, 200);
+        return c.json({ token, user: { username: userExist.username,id:userExist.id ,role: userExist.role } }, 200);
     } catch (error: any) {
         return c.json({ error: error?.message }, 400);
     }

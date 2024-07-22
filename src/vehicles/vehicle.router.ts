@@ -7,7 +7,7 @@ import { adminRoleAuth,bothRoleAuth } from '../middleware/bearAuth';
 export const VehiclesRouter = new Hono();
 
 // Get all Vehicles
-VehiclesRouter.get('/Vehicles', bothRoleAuth, listVehicles);
+VehiclesRouter.get('/Vehicles', listVehicles);
 
 // Get a single Vehicles
 VehiclesRouter.get('/Vehicles/:id', bothRoleAuth, getVehicles);
@@ -20,7 +20,7 @@ VehiclesRouter.post(
       return c.json(result.error, 400);
     }
   }),
-  adminRoleAuth, createVehicles
+ createVehicles
 );
 
 // Update a Vehicle
@@ -35,6 +35,6 @@ VehiclesRouter.put(
 );
 
 // Delete a Vehicle
-VehiclesRouter.delete('/users/:id', adminRoleAuth, deleteVehicles);
+VehiclesRouter.delete('/Vehicles/:id',  deleteVehicles);
 
 export default VehiclesRouter;

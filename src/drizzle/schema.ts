@@ -44,7 +44,8 @@ export const AuthonUser = pgTable("auth_on_users", {
  
 // Vehicle Specifications Table
 export const VehicleSpecificationsTable = pgTable('vehicle_specifications', {
-    vehicle_id: serial("vehicle_id").primaryKey(),
+    vehicleSpec_id:serial("vehicleSpec_id").primaryKey(),
+    vehicle_id: integer("vehicle_id").references(() => VehiclesTable.vehicle_id, {onDelete: "cascade"}),
     manufacturer: varchar("manufacturer", { length: 255 }).notNull(),
     model: varchar("model", { length: 255 }).notNull(),
     year: integer("year").notNull(),
@@ -58,8 +59,8 @@ export const VehicleSpecificationsTable = pgTable('vehicle_specifications', {
  
 // Vehicles Table
 export const VehiclesTable = pgTable('vehicles', {
-    vehicleSpec_id: serial("vehicleSpec_id").primaryKey(),
-    vehicle_id: integer("vehicle_id").references(() => VehicleSpecificationsTable.vehicle_id, { onDelete: "cascade" }).notNull(),
+    vehicle_id: serial("vehicle_id").primaryKey(),
+    // vehicle_id: integer("vehicle_id").references(() => VehicleSpecificationsTable.vehicle_id, { onDelete: "cascade" }).notNull(),
     rental_rate: decimal("rental_rate").notNull(),
     availability: boolean("availability").default(true).notNull(),
     created_at: timestamp("created_at").defaultNow().notNull(),
@@ -70,7 +71,7 @@ export const VehiclesTable = pgTable('vehicles', {
 export const BookingsTable = pgTable('bookings', {
     booking_id: serial("booking_id").primaryKey(),
     user_id: integer("user_id").references(() => UsersTable.user_id, { onDelete: "cascade" }).notNull(),
-    vehicle_id: integer("vehicle_id").references(() => VehicleSpecificationsTable.vehicle_id, { onDelete: "cascade" }).notNull(),
+    vehicle_id: integer("vehicle_id").references(() => VehiclesTable.vehicle_id, { onDelete: "cascade" }).notNull(),
     location_id: integer("location_id").references(() => LocationTable.location_id, { onDelete: "cascade" }).notNull(),
     booking_date: timestamp("booking_date").notNull(),
     return_date: timestamp("return_date").notNull(),
@@ -126,7 +127,7 @@ export const LocationTable = pgTable('location', {
 // Fleet Management Table
 export const FleetManagementTable = pgTable('fleet_management', {
     fleet_id: serial("fleet_id").primaryKey(),
-    vehicle_id: integer("vehicle_id").references(() => VehicleSpecificationsTable.vehicle_id, { onDelete: "cascade" }).notNull(),
+    vehicle_id: integer("vehicle_id").references(() => VehiclesTable.vehicle_id, { onDelete: "cascade" }).notNull(),
     acquisition_date: timestamp("acquisition_date").defaultNow().notNull(),
     depreciation_rate: decimal("depreciation_rate").notNull(),
     current_value: decimal("current_value").notNull(),
@@ -145,11 +146,17 @@ export const userRelations = relations(UsersTable, ({ many }) => ({
     tickets: many(CustomerSupportTicketsTable)
 }));
  
-export const vehicleRelations = relations(VehicleSpecificationsTable, ({ one, many }) => ({
-    vehicles: many(VehiclesTable),
+export const vehicleRelations = relations(VehiclesTable, ({  one,many }) => ({
+    VehicleSpecificationsTableehicles: one(VehiclesTable),
     bookings: many(BookingsTable),
     fleet: many(FleetManagementTable)
 }));
+
+export const vehicleSpecificationsRelations = relations(VehicleSpecificationsTable, ({ many }) => ({
+    vehicles: many(VehiclesTable),
+    bookings: many(BookingsTable),
+    fleetManagements: many(FleetManagementTable),
+  }));
  
 export const bookingRelations = relations(BookingsTable, ({ one }) => ({
     user: one(UsersTable, {
