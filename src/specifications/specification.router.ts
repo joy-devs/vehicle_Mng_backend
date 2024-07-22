@@ -7,10 +7,10 @@ import { adminRoleAuth,bothRoleAuth } from '../middleware/bearAuth';
 export const specificationsRouter = new Hono();
 
 // Get all specifications
-specificationsRouter.get('/specifications', bothRoleAuth, listspecifications);
+specificationsRouter.get('/specifications',  listspecifications);
 
 // Get a single specification
-specificationsRouter.get('/specifications/:id',bothRoleAuth, getspecifications);
+specificationsRouter.get('/specifications/:id', getspecifications);
 
 // Create a specification
 specificationsRouter.post(
@@ -20,7 +20,7 @@ specificationsRouter.post(
       return c.json(result.error, 400);
     }
   }),
-  bothRoleAuth, createspecifications
+   createspecifications
 );
 
 // Update a specification
@@ -31,10 +31,10 @@ specificationsRouter.put(
       return c.json(result.error, 400);
     }
   }),
-  bothRoleAuth, updatespecifications
+   updatespecifications
 );
 
 // Delete a specification
-specificationsRouter.delete('/specifications/:id', bothRoleAuth,deletespecifications);
+specificationsRouter.delete('/specifications/:id', deletespecifications);
 
 export default specificationsRouter;

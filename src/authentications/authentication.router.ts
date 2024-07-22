@@ -7,10 +7,10 @@ import { adminRoleAuth,bothRoleAuth } from '../middleware/bearAuth';
 export const authenticationsRouter = new Hono();
 
 // Get all authentications
-authenticationsRouter.get('/authentications', adminRoleAuth, listauthentications);
+authenticationsRouter.get('/authentications',  listauthentications);
 
 // Get a single authentication
-authenticationsRouter.get('/authentications/:id',bothRoleAuth, getauthentications);
+authenticationsRouter.get('/authentications/:id', getauthentications);
 
 // Create a authentication
 authenticationsRouter.post(
@@ -20,7 +20,7 @@ authenticationsRouter.post(
       return c.json(result.error, 400);
     }
   }),
-  adminRoleAuth,createauthentications
+  createauthentications
 );
 
 // Update a authentication
@@ -31,10 +31,10 @@ authenticationsRouter.put(
       return c.json(result.error, 400);
     }
   }),
-  bothRoleAuth, updateauthentications
+   updateauthentications
 );
 
 // Delete a authentication
-authenticationsRouter.delete('/users/:id', bothRoleAuth, deleteauthentications);
+authenticationsRouter.delete('/users/:id',  deleteauthentications);
 
 export default authenticationsRouter;

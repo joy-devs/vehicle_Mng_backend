@@ -7,10 +7,10 @@ import { adminRoleAuth,bothRoleAuth } from '../middleware/bearAuth';
 export const TicketsRouter = new Hono();
 
 // Get all Tickets
-TicketsRouter.get('/Tickets',adminRoleAuth, listTickets);
+TicketsRouter.get('/Tickets', listTickets);
 
 // Get a single Ticket
-TicketsRouter.get('/Tickets/:id',bothRoleAuth, getTickets);
+TicketsRouter.get('/Tickets/:id', getTickets);
 
 // Create a Ticket
 TicketsRouter.post(
@@ -20,7 +20,7 @@ TicketsRouter.post(
       return c.json(result.error, 400);
     }
   }),
-  bothRoleAuth, createTickets
+   createTickets
 );
 
 // Update a Ticket
@@ -31,10 +31,10 @@ TicketsRouter.put(
       return c.json(result.error, 400);
     }
   }),
-  bothRoleAuth, updateTickets
+   updateTickets
 );
 
 // Delete a Ticket
-TicketsRouter.delete('/Tickets/:id', bothRoleAuth, deleteTickets);
+TicketsRouter.delete('/Tickets/:id',  deleteTickets);
 
 export default TicketsRouter;

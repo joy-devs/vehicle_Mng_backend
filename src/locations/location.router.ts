@@ -7,10 +7,10 @@ import { adminRoleAuth,bothRoleAuth } from '../middleware/bearAuth';
 export const locationsRouter = new Hono();
 
 // Get all locations
-locationsRouter.get('/locations',adminRoleAuth, listlocations);
+locationsRouter.get('/locations', listlocations);
 
 // Get a single location
-locationsRouter.get('/locations/:id', bothRoleAuth, getlocations);
+locationsRouter.get('/locations/:id',  getlocations);
 
 // Create a user
 locationsRouter.post(
@@ -20,7 +20,7 @@ locationsRouter.post(
       return c.json(result.error, 400);
     }
   }),
-  bothRoleAuth, createlocations
+   createlocations
 );
 
 // Update a location
@@ -31,10 +31,10 @@ locationsRouter.put(
       return c.json(result.error, 400);
     }
   }),
-  bothRoleAuth, updatelocations
+   updatelocations
 );
 
 // Delete a location
-locationsRouter.delete('/locations/:id', bothRoleAuth, deletelocations);
+locationsRouter.delete('/locations/:id',  deletelocations);
 
 export default locationsRouter;

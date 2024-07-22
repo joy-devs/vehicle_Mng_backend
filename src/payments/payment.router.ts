@@ -7,10 +7,10 @@ import { adminRoleAuth,bothRoleAuth } from '../middleware/bearAuth';
 export const PaymentsRouter = new Hono();
 
 // Get all payments
-PaymentsRouter.get('/Payments',adminRoleAuth, listPayments);
+PaymentsRouter.get('/Payments', listPayments);
 
 // Get a single payment
-PaymentsRouter.get('/payments/:id',bothRoleAuth, getPayment);
+PaymentsRouter.get('/payments/:id', getPayment);
 
 // Create a payment
 PaymentsRouter.post(
@@ -29,10 +29,10 @@ PaymentsRouter.put(
       return c.json(result.error, 400);
     }
   }),
-  bothRoleAuth, updatePayments
+   updatePayments
 );
 
 // Delete a payment
-PaymentsRouter.delete('/payments/:id', bothRoleAuth, deletePayments);
+PaymentsRouter.delete('/payments/:id',  deletePayments);
 
 export default PaymentsRouter;

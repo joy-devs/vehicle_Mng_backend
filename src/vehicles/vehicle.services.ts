@@ -13,7 +13,7 @@ export const VehiclesTableService = async (limit?: number): Promise<TSVehicle[] 
 
 export const getVehiclesTableService = async (id: number): Promise<TIVehicle | undefined> => {
     return await db.query.VehiclesTable.findFirst({
-        where: eq(VehiclesTable.vehicleSpec_id, id)
+        where: eq(VehiclesTable.vehicle_id, id)
     });
 }
 
@@ -23,11 +23,11 @@ export const createVehiclesTableService = async (Vehicle: TIVehicle): Promise<st
 }
 
 export const updateVehiclesTableService = async (id: number, Vehicle: TIVehicle): Promise<string> => {
-    await db.update(VehiclesTable).set(Vehicle).where(eq(VehiclesTable.vehicleSpec_id, id));
+    await db.update(VehiclesTable).set(Vehicle).where(eq(VehiclesTable.vehicle_id, id));
     return "Vehicle updated successfully";
 }
 
 export const deleteVehiclesTableService = async (id: number): Promise<string> => {
-    await db.delete(VehiclesTable).where(eq(VehiclesTable.vehicleSpec_id, id));
+    await db.delete(VehiclesTable).where(eq(VehiclesTable.vehicle_id, id));
     return "Vehicle deleted successfully";
 }

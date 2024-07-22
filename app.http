@@ -13,6 +13,8 @@ Content-Type: application/json
 GET http://localhost:8000/api/Vehicles
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZW5uZXRoIGhhcmdpbiIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTcyMTMxNjEyMH0.BaQCRINp_LfnqSlcsD8rbJX2ct-42nTn_zh-hXaenLc 
 ###
+GET http://localhost:8000/api/bookings
+###
 DELETE http://localhost:8000/api/Vehicles/3
 ###
 POST http://localhost:8000/api/Vehicles
@@ -26,7 +28,7 @@ Content-Type: application/json
 ###
 
 GET http://localhost:8000/api/bookings
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZW5uZXRoIGhhcmdpbiIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTcyMTMxNjEyMH0.BaQCRINp_LfnqSlcsD8rbJX2ct-42nTn_zh-hXaenLc
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbGFpcmUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3MjE2NDgzOTB9.XBsULELiap5u-l7i__9QfYg-JtcKCKkbPP8TPw81gxQ
 ###
 
 POST http://localhost:8000/api/users
@@ -164,17 +166,20 @@ POST http://localhost:8000/api/register
 Content-Type: application/json
 
 {
-"userId":5,
-"username":"Joy Wambui" ,
+"username":"joy" ,
 "password":"112a",
-"role":"admin" 
+"role":"admin" ,
+"address":"nairobi",
+"fullname":"joy wambui",
+"contact_phone":"0789675354",
+"email":"joy@gmail.com"
 }
 ###
-POST http://localhost:8000/api/register
+POST http://localhost:8000/api/login
 Content-Type: application/json
 
 {
-   "username":"Joy Wambui" ,
+   "username":"joy " ,
    "password":"112a" 
 }
 
@@ -189,4 +194,28 @@ Content-Type: application/json
 "role":"admin" 
 
 }
+###
+POST http://localhost:8000/api/register
+Content-Type:application/json
+
+{
+"username":"claire" ,
+"password":"115",
+"role":"admin" ,
+"address":"nairobi",
+"fullname":"mitchelle claire",
+"contact_phone":"0767836542",
+"email":"claire@gmail.com"
+}
+###
+POST http://localhost:8000/api/login
+Content-Type: application/json
+
+{
+  "username":"claire" ,
+  "password":"115" 
+
+}
+
+ 
 

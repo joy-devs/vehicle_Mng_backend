@@ -8,10 +8,10 @@ import { adminRoleAuth,bothRoleAuth } from '../middleware/bearAuth';
 export const bookingsRouter = new Hono();
 
 // Get all booking
-bookingsRouter.get('/bookings', bothRoleAuth, listbookings);
+bookingsRouter.get('/bookings', listbookings);
 
 // Get a single bookings
-bookingsRouter.get('/bookings/:id', bothRoleAuth, getbookings);
+bookingsRouter.get('/bookings/:id',  getbookings);
 
 // Create a booking
 bookingsRouter.post(
@@ -21,7 +21,7 @@ bookingsRouter.post(
       return c.json(result.error, 400);
     }
   }),
-  bothRoleAuth, createbookings
+  createbookings
 );
 
 // Update a booking
@@ -32,10 +32,10 @@ bookingsRouter.put(
       return c.json(result.error, 400);
     }
   }),
-  bothRoleAuth, updatebookings
+   updatebookings
 );
 
 // Delete a bookings
-bookingsRouter.delete('/bookings/:id',bothRoleAuth, deletebookings);
+bookingsRouter.delete('/bookings/:id', deletebookings);
 
 export default bookingsRouter;

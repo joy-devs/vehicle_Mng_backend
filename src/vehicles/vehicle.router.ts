@@ -10,7 +10,7 @@ export const VehiclesRouter = new Hono();
 VehiclesRouter.get('/Vehicles', listVehicles);
 
 // Get a single Vehicles
-VehiclesRouter.get('/Vehicles/:id', bothRoleAuth, getVehicles);
+VehiclesRouter.get('/Vehicles/:id',  getVehicles);
 
 // Create a Vehicle
 VehiclesRouter.post(
@@ -31,7 +31,7 @@ VehiclesRouter.put(
       return c.json(result.error, 400);
     }
   }),
-  adminRoleAuth, updateVehicles
+   updateVehicles
 );
 
 // Delete a Vehicle
