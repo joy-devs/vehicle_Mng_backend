@@ -51,11 +51,11 @@ export const AuthenticationTableSchema = z.object({
 })
 
 export const BookingTableSchema = z.object({
-    booking_id:z.number(),
+    booking_id:z.number().optional(),
     user_id:z.number(),
     vehicle_id:z.number(),
     location_id:z.number(),
-    booking_date: z.date().default(() => new Date()),
+    booking_date: z.string(),
     total_amount:z.string(),
     booking_status:z.string(),
     created_at: z.date().default(() => new Date()),

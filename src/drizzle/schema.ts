@@ -74,7 +74,7 @@ export const BookingsTable = pgTable('bookings', {
     vehicle_id: integer("vehicle_id").references(() => VehiclesTable.vehicle_id, { onDelete: "cascade" }).notNull(),
     location_id: integer("location_id").references(() => LocationTable.location_id, { onDelete: "cascade" }).notNull(),
     booking_date: timestamp("booking_date").notNull(),
-    return_date: timestamp("return_date").notNull(),
+    return_date: timestamp("return_date",{mode : "string"}).notNull(),
     total_amount: decimal("total_amount").notNull(),
     booking_status: bookingStatusEnum("booking_status").default("Pending").notNull(),
     created_at: timestamp("created_at").defaultNow().notNull(),
