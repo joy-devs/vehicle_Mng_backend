@@ -41,6 +41,20 @@ Content-Type: application/json
 GET http://localhost:8000/api/bookings
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbGFpcmUiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3MjE2NDgzOTB9.XBsULELiap5u-l7i__9QfYg-JtcKCKkbPP8TPw81gxQ
 ###
+POST http://localhost:8000/api/bookings
+Content-Type: application/json
+
+{
+   "booking_id": 5,
+    "user_id": 4,
+    "vehicle_id": 4,
+    "location_id": 1,
+    "booking_date": "2024-07-12",
+    "return_date": "2024-07-16 ",
+    "total_amount": "198.00",
+    "booking_status": "Pending" 
+}
+###
 
 POST http://localhost:8000/api/users
 Content-Type: application/json
