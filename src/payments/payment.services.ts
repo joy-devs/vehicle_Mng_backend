@@ -43,7 +43,7 @@ export const deletePaymentService = async (id: number): Promise<string> => {
 
 export const createPaymentService = () => {
   return {
-    async createCheckoutSession(bookingId: number, amount: number) {
+    async createCheckoutSession(booking_id: number, amount: number) {
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         line_items: [
@@ -60,9 +60,9 @@ export const createPaymentService = () => {
         ],
         mode: "payment",
         success_url: `${process.env.FRONTEND_URL}/paymentsuccess`,
-        cancel_url: `${process.env.FRONTEND_URL}paymentcancel/`,
+        cancel_url: `${process.env.FRONTEND_URL}/paymentcancel`,
         metadata: {
-          bookingId: bookingId.toString(),
+          bookingId: booking_id.toString(),
         },
       });
 

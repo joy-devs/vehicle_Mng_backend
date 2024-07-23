@@ -136,5 +136,14 @@ Content-Type: application/json
 
 }
 
+###
+POST http://localhost:8000/api/create-checkout-session
+Content-Type: application/json
+
+{
+  "booking_id": 5,
+  "amount": 30
+}
+
  
 
