@@ -4,6 +4,7 @@ import { zValidator } from '@hono/zod-validator';
 import { PaymentsTableSchema } from '../validator'; 
 import { adminRoleAuth,bothRoleAuth } from '../middleware/bearAuth';
 
+
 export const PaymentsRouter = new Hono();
 
 // Get all payments
@@ -34,5 +35,6 @@ PaymentsRouter.put(
 
 // Delete a payment
 PaymentsRouter.delete('/payments/:id',  deletePayments);
+PaymentsRouter.post("/create-checkout-session",createPayments.createCheckoutSession);
 
 export default PaymentsRouter;

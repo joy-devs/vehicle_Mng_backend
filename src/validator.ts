@@ -56,7 +56,7 @@ export const BookingTableSchema = z.object({
     vehicle_id:z.number(),
     location_id:z.number(),
     booking_date: z.date().default(() => new Date()),
-    total_amount:z.number(),
+    total_amount:z.string(),
     booking_status:z.string(),
     created_at: z.date().default(() => new Date()),
     updated_at: z.date().default(() => new Date()),
