@@ -15,22 +15,14 @@ usersRouter.get('/users/:id', getusers);
 // Create a user
 usersRouter.post(
   '/users',
-  zValidator('json', UsersTableSchema, (result, c) => {
-    if (!result.success) {
-      return c.json(result.error, 400);
-    }
-  }),
+  
    createusers
 );
 
 // Update a user
 usersRouter.put(
   '/users/:id',
-  zValidator('json', UsersTableSchema, (result, c) => {
-    if (!result.success) {
-      return c.json(result.error, 400);
-    }
-  }),
+  
    updateusers
 );
 

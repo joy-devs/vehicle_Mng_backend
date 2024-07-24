@@ -15,22 +15,14 @@ locationsRouter.get('/locations/:id',  getlocations);
 // Create a user
 locationsRouter.post(
   '/locations',
-  zValidator('json', LocationTableSchema, (result, c) => {
-    if (!result.success) {
-      return c.json(result.error, 400);
-    }
-  }),
+  
    createlocations
 );
 
 // Update a location
 locationsRouter.put(
   '/locations/:id',
-  zValidator('json', LocationTableSchema, (result, c) => {
-    if (!result.success) {
-      return c.json(result.error, 400);
-    }
-  }),
+  
    updatelocations
 );
 

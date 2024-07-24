@@ -15,22 +15,14 @@ FleetsRouter.get('/Fleets/:id', getFleets);
 // Create a user
 FleetsRouter.post(
   '/Fleets',
-  zValidator('json', FleetManagementTableSchema, (result, c) => {
-    if (!result.success) {
-      return c.json(result.error, 400);
-    }
-  }),
+  
   createFleets
 );
 
 // Update a Fleet
 FleetsRouter.put(
   '/Fleets/:id',
-  zValidator('json', FleetManagementTableSchema, (result, c) => {
-    if (!result.success) {
-      return c.json(result.error, 400);
-    }
-  }),
+  
   updateFleets
 );
 

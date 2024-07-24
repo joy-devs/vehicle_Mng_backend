@@ -25,11 +25,7 @@ PaymentsRouter.get(
 // Update a Payment
 PaymentsRouter.put(
   '/payments/:id',
-  zValidator('json', PaymentsTableSchema, (result, c) => {
-    if (!result.success) {
-      return c.json(result.error, 400);
-    }
-  }),
+  
    updatePayments
 );
 

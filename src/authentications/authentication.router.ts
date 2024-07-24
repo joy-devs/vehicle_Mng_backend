@@ -15,22 +15,14 @@ authenticationsRouter.get('/authentications/:id', getauthentications);
 // Create a authentication
 authenticationsRouter.post(
   '/authentications',
-  zValidator('json', AuthenticationTableSchema, (result, c) => {
-    if (!result.success) {
-      return c.json(result.error, 400);
-    }
-  }),
+  
   createauthentications
 );
 
 // Update a authentication
 authenticationsRouter.put(
   '/users/:id',
-  zValidator('json', AuthenticationTableSchema, (result, c) => {
-    if (!result.success) {
-      return c.json(result.error, 400);
-    }
-  }),
+  
    updateauthentications
 );
 

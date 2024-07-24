@@ -15,22 +15,13 @@ specificationsRouter.get('/specifications/:id', getspecifications);
 // Create a specification
 specificationsRouter.post(
   '/specifications',
-  zValidator('json', VehicleSpecificationsTableSchema, (result, c) => {
-    if (!result.success) {
-      return c.json(result.error, 400);
-    }
-  }),
    createspecifications
 );
 
 // Update a specification
 specificationsRouter.put(
   '/specifications/:id',
-  zValidator('json', VehicleSpecificationsTableSchema, (result, c) => {
-    if (!result.success) {
-      return c.json(result.error, 400);
-    }
-  }),
+  
    updatespecifications
 );
 

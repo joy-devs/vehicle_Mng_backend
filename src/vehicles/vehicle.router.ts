@@ -15,22 +15,14 @@ VehiclesRouter.get('/Vehicles/:id',  getVehicles);
 // Create a Vehicle
 VehiclesRouter.post(
   '/Vehicles',
-  zValidator('json', VehiclesTableSchema, (result, c) => {
-    if (!result.success) {
-      return c.json(result.error, 400);
-    }
-  }),
+  
  createVehicles
 );
 
 // Update a Vehicle
 VehiclesRouter.put(
   '/Vehicles/:id',
-  zValidator('json', VehiclesTableSchema, (result, c) => {
-    if (!result.success) {
-      return c.json(result.error, 400);
-    }
-  }),
+  
    updateVehicles
 );
 

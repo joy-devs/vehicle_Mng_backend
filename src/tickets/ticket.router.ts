@@ -15,22 +15,14 @@ TicketsRouter.get('/Tickets/:id', getTickets);
 // Create a Ticket
 TicketsRouter.post(
   '/Tickets',
-  zValidator('json', CustomerSupportTicketsTableSchema, (result, c) => {
-    if (!result.success) {
-      return c.json(result.error, 400);
-    }
-  }),
+  
    createTickets
 );
 
 // Update a Ticket
 TicketsRouter.put(
   '/Tickets/:id',
-  zValidator('json', CustomerSupportTicketsTableSchema, (result, c) => {
-    if (!result.success) {
-      return c.json(result.error, 400);
-    }
-  }),
+
    updateTickets
 );
 

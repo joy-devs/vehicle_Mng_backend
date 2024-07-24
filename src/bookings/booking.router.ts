@@ -16,22 +16,14 @@ bookingsRouter.get('/bookings/:id',  getbookings);
 // Create a booking
 bookingsRouter.post(
   '/bookings',
-  zValidator('json', BookingTableSchema, (result, c) => {
-    if (!result.success) {
-      return c.json(result.error, 400);
-    }
-  }),
+  
   createbookings
 );
 
 // Update a booking
 bookingsRouter.put(
   '/bookings/:id',
-  zValidator('json', BookingTableSchema, (result, c) => {
-    if (!result.success) {
-      return c.json(result.error, 400);
-    }
-  }),
+  
    updatebookings
 );
 
