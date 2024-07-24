@@ -19,7 +19,9 @@ export const getbookings = async (c: Context): Promise<Response> => {
 
 // Create a new booking
 export const createbookings = async (c: Context): Promise<Response> => {
+  console.log('here')
   const bookingData = await c.req.json();
+
   console.log(bookingData)
   const booking = await createBookingsTableService(bookingData);
   return c.json(booking, 200);
