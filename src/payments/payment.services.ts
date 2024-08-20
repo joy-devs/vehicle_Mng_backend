@@ -1,3 +1,5 @@
+//payment service
+
 import { eq } from "drizzle-orm";
 import db, { stripe } from "../drizzle/db";
 import { PaymentsTable, TIPayment, TSPayment, BookingsTable } from "../drizzle/schema";
