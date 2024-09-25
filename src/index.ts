@@ -49,8 +49,6 @@ app.get("/", (c) => {
     return c.text('route not found')
   })
   
-  app.route("/api", usersRouter); 
-  
   const PORT = process.env.PORT || 8000; 
   
   console.log(`Server is running on port ${PORT}`);
